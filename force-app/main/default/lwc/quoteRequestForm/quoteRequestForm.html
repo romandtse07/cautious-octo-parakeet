@@ -1,0 +1,10 @@
+<template>
+    <lightning-button variant="brand" label="Add Service" title="Primary action" onclick={addQuote} class="slds-m-left_x-small"></lightning-button>
+    <div id="quote-lines" class="slds-p-bottom_large slds-p-left_large" style="width:500px">
+        <template for:each={quotes} for:item="quote">
+            <c-quote-line 
+                key={quote.num}
+                ondeletequote={deleteQuote}></c-quote-line>
+        </template>
+    </div>
+</template>

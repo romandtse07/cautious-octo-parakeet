@@ -4,7 +4,9 @@
         <template for:each={quotes} for:item="quote">
             <c-quote-line 
                 key={quote.num}
-                ondeletequote={deleteQuote}></c-quote-line>
+                quotenum={quote.num}
+                ondeletequote={deleteQuote}>
+            </c-quote-line>
         </template>
     </div>
 </template>

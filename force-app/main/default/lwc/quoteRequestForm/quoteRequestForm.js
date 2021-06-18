@@ -16,7 +16,7 @@ export default class QuoteRequestForm extends LightningElement {
     deleteQuote(event) {
         if (this.quotes.length > 1) {
             this.quotes = this.quotes.filter(
-                quote => quote.num != event.quoteNum
+                quote => quote.num != event.detail
             );
         }
     }

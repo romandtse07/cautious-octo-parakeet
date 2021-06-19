@@ -1,12 +1,15 @@
 <template>
-    <lightning-button variant="brand" label="Add Service" title="Primary action" onclick={addQuote} class="slds-m-left_x-small"></lightning-button>
-    <div id="quote-lines" class="slds-p-bottom_large slds-p-left_large" style="width:500px">
+    <lightning-button variant="brand-outline" label="Add Request" title="Primary action" onclick={addQuote} class="slds-p-around-medium"></lightning-button>
+    <lightning-button variant="brand" label="Submit" click={handleFirstSubmit} class="slds-p-around_medium"></lightning-button>
+    <div id="quote-lines">
         <template for:each={quotes} for:item="quote">
-            <c-quote-line 
-                key={quote.num}
-                quotenum={quote.num}
-                ondeletequote={deleteQuote}>
-            </c-quote-line>
+            <div key={quote.num} class="wut slds-p-around_small">
+                <c-quote-line 
+                    key={quote.num}
+                    quotenum={quote.num}
+                    ondeletequote={deleteQuote}>
+                </c-quote-line>
+            </div>
         </template>
     </div>
 </template>

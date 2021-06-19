@@ -1,0 +1,19 @@
+.wut:nth-child(even){
+    background: white;
+    border: 1px solid #ccc;
+    border-radius: 10px;
+}
+
+.wut{
+    animation-name: appear;
+    animation-duration: .5s;
+}
+
+@keyframes appear{
+    from{
+        opacity:0%;
+    }
+    to{
+        opacity:100%;
+    }
+}

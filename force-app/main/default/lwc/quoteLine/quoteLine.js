@@ -9,4 +9,13 @@ export default class QuoteLine extends LightningElement {
         );
         this.dispatchEvent(deleteEvent);
     }
+
+    @api
+    handleSubmit() {
+        let req = {};
+        this.template
+            .querySelectorAll('lightning-input')
+            .forEach(element => { req[element.getAttribute('data-formfield')] = element.value});
+        console.log(req);
+    }
 }

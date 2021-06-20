@@ -20,4 +20,10 @@ export default class QuoteRequestForm extends LightningElement {
             );
         }
     }
+
+    handleSubmitAll() {
+        this.template.querySelectorAll('c-quote-line')
+            .forEach(element => {element.handleSubmit();});
+        console.log('wut the main');
+    }
 }

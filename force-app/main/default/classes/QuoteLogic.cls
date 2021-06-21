@@ -1,6 +1,6 @@
 public with sharing class QuoteLogic {
 
-    static Blob getQuoteFiles(String service, Float margin) {
+    static Blob getQuoteFiles(String service, Decimal margin) {
         Http h = new Http();
         HttpRequest req = new HttpRequest();
         req.setEndpoint('https://rando-file-server.herokuapp.com');
@@ -12,15 +12,17 @@ public with sharing class QuoteLogic {
         return file_attachment;
     }
 
-    public static Void createQuoteLine(String parentQuoteId, String service, Float margin) {
+    @AuraEnabled
+    public static Void createQuoteLine(String parentQuoteId, String service, Decimal margin) {
         Proto_A_Quote_Line__c newQuotedService = new Proto_A_Quote_Line__c();
         newQuotedService.Name = service;
-        newQuotedService.Service = service;
-        newQuotedService.Margin = margin;
-        newQuotedService.Proto_A_Quote_Line__c = parentQuoteId;
+        newQuotedService.Service_Name__c = service;
+        newQuotedService.Margin__c = margin;
+        newQuotedService.Proto_A_Quote__c = parentQuoteId;
         insert newQuotedService;
     }
 
+    @AuraEnabled
     public static String createNewQuote(String quoteName){
         Proto_A_Quote__c newQuote = new Proto_A_Quote__c();
         newQuote.name = quoteName;

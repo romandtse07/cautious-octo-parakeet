@@ -1,8 +1,10 @@
 import { LightningElement, track } from 'lwc';
-
+import { NavigationMixin } from 'lightning/navigation';
+import createNewQuote from '@salesforce/apex/QuoteLogic.createNewQuote';
 
 export default class QuoteRequestForm extends LightningElement {
     numQuotes = 1;
+
     @track quotes = [
         {num: 1}
     ];
@@ -22,8 +24,11 @@ export default class QuoteRequestForm extends LightningElement {
     }
 
     handleSubmitAll() {
+        let quoteId = createNewQuote('testing page');
         this.template.querySelectorAll('c-quote-line')
-            .forEach(element => {element.handleSubmit();});
+            .forEach(element => {element.parentQuoteId = quoteId;
+                element.handleSubmit();});
         console.log('wut the main');
+        
     }
 }

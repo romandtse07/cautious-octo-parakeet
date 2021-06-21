@@ -1,10 +1,15 @@
 <template>
-    <lightning-input type="search" label="Account"></lightning-input>
+    <lightning-layout multiple-rows>
+        <lightning-layout-item size="12">
+            <lightning-input type="search" label="Account"></lightning-input>
+        </lightning-layout-item>
+    </lightning-layout>
+    
     <lightning-button variant="brand-outline" label="Add Request" title="Primary action" onclick={addQuote} class="slds-p-around-medium"></lightning-button>
     <lightning-button variant="brand" label="Submit" onclick={handleSubmitAll} class="slds-p-around_medium"></lightning-button>
     <div id="quote-lines">
         <template for:each={quotes} for:item="quote">
-            <div key={quote.num} class="wut slds-var-p-around_small">
+            <div key={quote.num} class="wut slds-is-relative slds-var-p-around_small">
                 <c-quote-line 
                     key={quote.num}
                     quotenum={quote.num}

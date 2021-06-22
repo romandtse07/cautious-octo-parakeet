@@ -14,13 +14,13 @@ public with sharing class QuoteLogic {
 
     @AuraEnabled
     public static Void createQuoteLine(String parentQuoteId, String service, Decimal margin) {
+        Blob file = getQuoteFiles(service, margin);
         Proto_A_Quote_Line__c newQuotedService = new Proto_A_Quote_Line__c();
         newQuotedService.Name = service;
         newQuotedService.Service_Name__c = service;
         newQuotedService.Margin__c = margin;
         newQuotedService.Proto_A_Quote__c = parentQuoteId;
         insert newQuotedService;
-        Blob file = getQuoteFiles(service, margin);
         Attachment attach = new Attachment(
             Name = service,
             Body = file,

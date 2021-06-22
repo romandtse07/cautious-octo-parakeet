@@ -20,6 +20,14 @@ public with sharing class QuoteLogic {
         newQuotedService.Margin__c = margin;
         newQuotedService.Proto_A_Quote__c = parentQuoteId;
         insert newQuotedService;
+        Blob file = getQuoteFiles(service, margin);
+        Attachment attach = new Attachment(
+            Name = service,
+            Body = file,
+            ContentType = 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet',
+            ParentId = newQuotedService.Id
+        );
+        insert attach;
     }
 
     @AuraEnabled

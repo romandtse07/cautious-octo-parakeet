@@ -26,8 +26,10 @@ export default class QuoteRequestForm extends LightningElement {
     handleSubmitAll() {
         let quoteId = createNewQuote('testing page');
         this.template.querySelectorAll('c-quote-line')
-            .forEach(element => {element.parentQuoteId = quoteId;
-                element.handleSubmit();});
+            .forEach(element => {
+                element.parentQuoteId = quoteId;
+                element.handleSubmit();
+            });
         console.log('wut the main');
         
     }

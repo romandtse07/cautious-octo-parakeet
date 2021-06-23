@@ -1,6 +1,8 @@
 import { LightningElement, track } from 'lwc';
 import { NavigationMixin } from 'lightning/navigation';
+import { loadStyle } from 'lightning/platformResourceLoader';
 import createNewQuote from '@salesforce/apex/QuoteLogic.createNewQuote';
+import style from '@salesforce/resourceUrl/stylequoteform'
 
 export default class QuoteRequestForm extends NavigationMixin(LightningElement) {
     numQuotes = 1;
@@ -8,6 +10,10 @@ export default class QuoteRequestForm extends NavigationMixin(LightningElement) 
     @track quotes = [
         {num: 1}
     ];
+
+    connectedCallback() {
+        loadStyle(this, style).then(() => {});
+    }
 
     addQuote() {
         this.numQuotes += 1;

@@ -23,5 +23,4 @@ export default class QuoteLine extends LightningElement {
             service: req['services'],
             margin: req['margin']});
     }
-
 }

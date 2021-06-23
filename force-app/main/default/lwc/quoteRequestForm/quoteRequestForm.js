@@ -2,7 +2,7 @@ import { LightningElement, track } from 'lwc';
 import { NavigationMixin } from 'lightning/navigation';
 import createNewQuote from '@salesforce/apex/QuoteLogic.createNewQuote';
 
-export default class QuoteRequestForm extends LightningElement {
+export default class QuoteRequestForm extends NavigationMixin(LightningElement) {
     numQuotes = 1;
 
     @track quotes = [
@@ -23,14 +23,24 @@ export default class QuoteRequestForm extends LightningElement {
         }
     }
 
-    handleSubmitAll() {
-        let quoteId = createNewQuote('testing page');
+    async handleSubmitAll() {
+        console.log('submission started');
+        let quoteId = await createNewQuote({quoteName:'testing page'});
+        console.log(quoteId);
+        let submissions = [];
         this.template.querySelectorAll('c-quote-line')
             .forEach(element => {
                 element.parentQuoteId = quoteId;
-                element.handleSubmit();
+                submissions.push(element.handleSubmit());
             });
-        console.log('wut the main');
-        
+        await Promise.all(submissions);
+        this[NavigationMixin.Navigate]({
+            type: 'standard__recordPage',
+            attributes: {
+                recordId: quoteId,
+                objectApiName: 'Proto_A_Quote__c',
+                actionName: 'view'
+            }
+        });
     }
 }

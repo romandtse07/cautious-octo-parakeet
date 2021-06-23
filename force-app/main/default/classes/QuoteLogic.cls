@@ -22,7 +22,7 @@ public with sharing class QuoteLogic {
         newQuotedService.Proto_A_Quote__c = parentQuoteId;
         insert newQuotedService;
         Attachment attach = new Attachment(
-            Name = service,
+            Name = service + '.xlsx',
             Body = file,
             ContentType = 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet',
             ParentId = newQuotedService.Id

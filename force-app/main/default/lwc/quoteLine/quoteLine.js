@@ -19,9 +19,9 @@ export default class QuoteLine extends LightningElement {
             .querySelectorAll('lightning-input')
             .forEach(element => { req[element.getAttribute('data-formfield')] = element.value;});
         console.log(req);
-        createQuoteLine(parentQuoteId = this.parentQuoteId,
-            service = req['services'],
-            margin = req['margin']);
+        return createQuoteLine({parentQuoteId: this.parentQuoteId,
+            service: req['services'],
+            margin: req['margin']});
     }
 
 }

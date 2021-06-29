@@ -1,13 +1,17 @@
 .wut:nth-child(even){
-    background: white;
-    border: 1px solid #ccc;
-    border-radius: 10px;
+    background: white; 
+}
+
+.wut:nth-child(odd){
+    background: lightgray;
 }
 
 .wut{
     animation-name: appear;
     animation-duration: .5s;
     z-index:1;
+    border: 1px solid #ccc;
+    border-radius: 10px;
 }
 
 @keyframes appear{

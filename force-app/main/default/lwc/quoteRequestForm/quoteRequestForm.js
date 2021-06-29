@@ -1,10 +1,30 @@
-import { LightningElement, track } from 'lwc';
+import { LightningElement, track, wire } from 'lwc';
 import { NavigationMixin } from 'lightning/navigation';
 import { loadStyle } from 'lightning/platformResourceLoader';
 import createNewQuote from '@salesforce/apex/QuoteLogic.createNewQuote';
+import searchAccounts from '@salesforce/apex/AccountController.searchAccounts';
 import style from '@salesforce/resourceUrl/stylequoteform'
 
 export default class QuoteRequestForm extends NavigationMixin(LightningElement) {
+    //account search this should be moved to a child prolly need later
+    searchTerm = '';
+    accountSearchResults;
+    @wire(searchAccounts, {search: '$searchTerm'})
+    findAccounts(results) {
+        if (results.data) {
+            this.accountSearchResults = results.data;
+        }
+        console.log(results);
+    };
+    //lifted from bears
+    handleSearchTermChange(event) {
+		window.clearTimeout(this.delayTimeout);
+		const searchTerm = event.target.value;
+		this.delayTimeout = setTimeout(() => {
+			this.searchTerm = searchTerm;
+		}, 500);
+	}
+    //quote logic
     numQuotes = 1;
 
     @track quotes = [

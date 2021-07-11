@@ -17,7 +17,7 @@ export default class QuoteRequestForm extends NavigationMixin(LightningElement) 
         accountSearch(event.detail)
             .then(results => {
                 lookupElement.setSearchResults(results);
-            })
+            });
 	}
     //quote logic
     numQuotes = 1;
@@ -28,6 +28,12 @@ export default class QuoteRequestForm extends NavigationMixin(LightningElement) 
 
     connectedCallback() {
         loadStyle(this, style).then(() => {});
+    }
+
+    renderedCallback(){
+        let newAcctOption = [{value:'Account', label:'New Account'}];
+        console.log(this.template.querySelectorAll('c-quote-line'));
+        this.template.querySelector('c-lookup').newRecordOptions = newAcctOption;
     }
 
     addQuote() {

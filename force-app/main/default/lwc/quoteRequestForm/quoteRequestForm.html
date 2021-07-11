@@ -7,7 +7,7 @@
         </header>
         <lightning-layout multiple-rows>
             <lightning-layout-item size="12">
-                <lightning-input type="search" label="Account" onchange={handleSearchTermChange}></lightning-input>
+                <c-lookup onsearch={handleSearchAccount} label="Account" placeholder="Search Salesforce"></c-lookup>                
             </lightning-layout-item>
         </lightning-layout>
         <lightning-button variant="brand-outline" label="Add Request" title="Primary action" onclick={addQuote} class="slds-p-around-medium"></lightning-button>

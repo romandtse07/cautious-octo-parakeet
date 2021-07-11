@@ -301,7 +301,8 @@ export default class Lookup extends NavigationMixin(LightningElement) {
                     actionName: 'new'
                 },
                 state: {
-                    defaultFieldValues: selection.defaults
+                    defaultFieldValues: selection.defaults,
+                    navigationLocation: 'RELATED_LIST'
                 }
             });
         });

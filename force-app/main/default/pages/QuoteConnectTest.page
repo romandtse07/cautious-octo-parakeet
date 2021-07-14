@@ -1,0 +1,25 @@
+<apex:page controller="QuoteRemoter">
+    <script type="text/javascript">
+    function getRemoteQuoteLines() {
+ 
+        Visualforce.remoting.Manager.invokeAction(
+            '{!$RemoteAction.QuoteRemoter.getQuoteLines}',
+            'a115e000001qTgeAAE', 
+            function(result, event){
+                if (event.status) {
+                    console.log(result);
+                } else if (event.type === 'exception') {
+                    document.getElementById("responseErrors").innerHTML = 
+                        event.message + "<br/>\n<pre>" + event.where + "</pre>";
+                } else {
+                    document.getElementById("responseErrors").innerHTML = event.message;
+                }
+            }, 
+            {escape: true}
+        );
+    }
+    getRemoteQuoteLines();
+    </script>
+    <div id="results"></div>
+    <div id="responseErrors"></div>
+</apex:page>

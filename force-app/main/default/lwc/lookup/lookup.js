@@ -1,5 +1,6 @@
 import { LightningElement, api } from 'lwc';
 import { NavigationMixin } from 'lightning/navigation';
+import { encodeDefaultFieldValues } from 'lightning/pageReferenceUtils';
 
 const SEARCH_DELAY = 300; // Wait 300 ms after user stops typing then, peform search
 
@@ -289,6 +290,9 @@ export default class Lookup extends NavigationMixin(LightningElement) {
     handleNewRecordClick(event) {
         const objectApiName = event.currentTarget.dataset.sobject;
         const selection = this.newRecordOptions.find((option) => option.value === objectApiName);
+        const nameDefault = encodeDefaultFieldValues({
+            Name: this._searchTerm
+        });
 
         const preNavigateCallback = selection.preNavigateCallback
             ? selection.preNavigateCallback
@@ -301,7 +305,7 @@ export default class Lookup extends NavigationMixin(LightningElement) {
                     actionName: 'new'
                 },
                 state: {
-                    defaultFieldValues: selection.defaults,
+                    defaultFieldValues: nameDefault,
                     navigationLocation: 'RELATED_LIST'
                 }
             });
